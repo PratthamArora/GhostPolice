@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             generateBtn.setOnClickListener {
                 val row = rowInputEditText.text.toString().toInt()
                 val col = colInputEditText.text.toString().toInt()
-                if (row <= 2 || col <= 2) {
+                if (row < 2 || col < 2) {
                     Toast.makeText(
                         this@MainActivity,
                         "enter values greater than or equal to 2",
