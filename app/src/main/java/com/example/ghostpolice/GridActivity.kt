@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.GridLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.ghostpolice.databinding.ActivityGridBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -96,6 +97,18 @@ class GridActivity : AppCompatActivity() {
                 textView.text = ""
                 textView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
                 textView.gravity = Gravity.CENTER
+                textView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        androidx.appcompat.R.color.material_blue_grey_800
+                    )
+                )
+                textView.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
 
                 val params = GridLayout.LayoutParams()
                 params.rowSpec = GridLayout.spec(row, 1f)
