@@ -24,6 +24,7 @@ class GridActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        binding.changePos.isEnabled = false
         row = intent.getIntExtra("row", 2)
         col = intent.getIntExtra("col", 2)
         setupGrid()
