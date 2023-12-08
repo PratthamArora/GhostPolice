@@ -36,23 +36,31 @@ class GridActivity : AppCompatActivity() {
 
         binding.changePos.setOnClickListener {
             it.isEnabled = false
-            updateTextAtRowAndColumn(
-                curPolicePosition.first,
-                curPolicePosition.second,
-                "",
-                isGhost = false,
-                isReset = true
-            )
-            updateTextAtRowAndColumn(
-                curGhostPosition.first,
-                curGhostPosition.second,
-                "",
-                isGhost = false,
-                isReset = true
-            )
+            resetGhostPosition()
+            resetPolicePosition()
             placeGhost()
             placePolice()
         }
+    }
+
+    private fun resetGhostPosition() {
+        updateTextAtRowAndColumn(
+            curGhostPosition.first,
+            curGhostPosition.second,
+            "",
+            isGhost = true,
+            isReset = true
+        )
+    }
+
+    private fun resetPolicePosition() {
+        updateTextAtRowAndColumn(
+            curPolicePosition.first,
+            curPolicePosition.second,
+            "",
+            isGhost = false,
+            isReset = true
+        )
     }
 
     private fun placePolice() {
@@ -141,9 +149,6 @@ class GridActivity : AppCompatActivity() {
         isGhost: Boolean,
         isReset: Boolean
     ) {
-        if (isReset) {
-            if (row == -1 || column == -1) return
-        }
         val rowIndex = row - 1
         val cellIndex = rowIndex * binding.gridLayout.columnCount + column - 1
 
