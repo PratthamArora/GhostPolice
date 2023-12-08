@@ -1,7 +1,6 @@
 package com.example.ghostpolice
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.GridLayout
@@ -47,7 +46,6 @@ class GridActivity : AppCompatActivity() {
 
             while (true) {
                 newPolicePosition = generateRandomCoordinate()
-                Log.d("shaggz", "placePolice:  while (true)  -> $newPolicePosition ")
                 if (newPolicePosition != ghostPosition &&
                     newPolicePosition.first != ghostPosition.first &&
                     newPolicePosition.second != ghostPosition.second &&
@@ -58,10 +56,6 @@ class GridActivity : AppCompatActivity() {
             }
             policePosition = newPolicePosition
 
-            Log.d(
-                "shaggz",
-                "placePolice: row = ${newPolicePosition.first} and col = ${newPolicePosition.second} "
-            )
             updateTextAtRowAndColumn(
                 newPolicePosition.first,
                 newPolicePosition.second,
@@ -85,10 +79,7 @@ class GridActivity : AppCompatActivity() {
                 }
             }
             ghostPosition = newGhostPosition
-            Log.d(
-                "shaggz",
-                "placeGhost: row = ${ghostPosition.first} and col = ${ghostPosition.second} "
-            )
+
             updateTextAtRowAndColumn(
                 ghostPosition.first,
                 ghostPosition.second, "Ghost", true
@@ -120,10 +111,6 @@ class GridActivity : AppCompatActivity() {
         val rowIndex = row - 1
         val cellIndex = rowIndex * binding.gridLayout.columnCount + column - 1
 
-        Log.d(
-            "shaggz",
-            "updateTextAtRowAndColumn: row = $row and col = $column and type = $newText"
-        )
         if (cellIndex >= 0 && cellIndex < binding.gridLayout.childCount) {
             val childView: View = binding.gridLayout.getChildAt(cellIndex)
 
