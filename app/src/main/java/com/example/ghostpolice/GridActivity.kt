@@ -36,8 +36,20 @@ class GridActivity : AppCompatActivity() {
 
         binding.changePos.setOnClickListener {
             it.isEnabled = false
-            clearPosition(curPolicePosition.first, curPolicePosition.second)
-            clearPosition(curGhostPosition.first, curGhostPosition.second)
+            updateTextAtRowAndColumn(
+                curPolicePosition.first,
+                curPolicePosition.second,
+                "",
+                isGhost = false,
+                isReset = true
+            )
+            updateTextAtRowAndColumn(
+                curGhostPosition.first,
+                curGhostPosition.second,
+                "",
+                isGhost = false,
+                isReset = true
+            )
             placeGhost()
             placePolice()
         }
@@ -64,7 +76,8 @@ class GridActivity : AppCompatActivity() {
                 newPolicePosition.first,
                 newPolicePosition.second,
                 "Police",
-                false
+                isGhost = false,
+                isReset = false
             )
             binding.changePos.isEnabled = true
         }
@@ -86,7 +99,8 @@ class GridActivity : AppCompatActivity() {
 
             updateTextAtRowAndColumn(
                 ghostPosition.first,
-                ghostPosition.second, "Ghost", true
+                ghostPosition.second, "Ghost",
+                isGhost = true, isReset = false
             )
         }
     }
@@ -122,7 +136,14 @@ class GridActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateTextAtRowAndColumn(row: Int, column: Int, newText: String, isGhost: Boolean) {
+    private fun updateTextAtRowAndColumn(
+        row: Int, column: Int, newText: String,
+        isGhost: Boolean,
+        isReset: Boolean
+    ) {
+        if (isReset) {
+            if (row == -1 || column == -1) return
+        }
         val rowIndex = row - 1
         val cellIndex = rowIndex * binding.gridLayout.columnCount + column - 1
 
@@ -130,28 +151,14 @@ class GridActivity : AppCompatActivity() {
             val childView: View = binding.gridLayout.getChildAt(cellIndex)
 
             if (childView is TextView) {
-                if (isGhost) {
-                    curGhostPosition = Pair(row, column)
-                } else {
-                    curPolicePosition = Pair(row, column)
-                }
+                if (!isReset)
+                    if (isGhost) {
+                        curGhostPosition = Pair(row, column)
+                    } else {
+                        curPolicePosition = Pair(row, column)
+                    }
 
                 childView.text = newText
-            }
-        }
-    }
-
-    private fun clearPosition(row: Int, column: Int) {
-        if (row == -1 || column == -1) return
-
-        val rowIndex = row - 1
-        val cellIndex = rowIndex * binding.gridLayout.columnCount + column - 1
-
-        if (cellIndex >= 0 && cellIndex < binding.gridLayout.childCount) {
-            val childView: View = binding.gridLayout.getChildAt(cellIndex)
-
-            if (childView is TextView) {
-                childView.text = ""
             }
         }
     }
