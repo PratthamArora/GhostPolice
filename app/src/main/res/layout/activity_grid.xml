@@ -8,6 +8,7 @@
         android:id="@+id/gridLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/black"
         android:layout_margin="16dp"
         app:layout_constraintBottom_toTopOf="@id/changePos"
         app:layout_constraintEnd_toEndOf="parent"
